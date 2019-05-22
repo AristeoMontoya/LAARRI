@@ -1,11 +1,12 @@
 var express = require("express");
+
 var aplicacion = express(); // este guapo es el servidor, creo
 aplicacion.listen(8989); // puerto en que el servidor jalará. Normalmente es el 8080 uwu
 // INCIO
 aplicacion.get("/", pantallaInicio);
 aplicacion.get("/Login", pantallaLogin);
 aplicacion.get("/Registrarse", pantallaRegistrarse);
-aplicacion.get("/Recuperar-contraseña", pantallaRecuperarContra);
+aplicacion.get("/Recuperar-contra", pantallaRecuperarContra);
 // ALUMNO
 aplicacion.get("Usuario/Tablero", pantallaTableroAlumno);
 aplicacion.get("Usuario/Solicitar-de-convalidación", pantallaSolicitudConvalidacion);
@@ -17,7 +18,7 @@ aplicacion.get("Usuario/Solicitar-analisis", pantallaSolicitarAnalisis);
 aplicacion.get("Usuario/Actualizar-perfil", pantallaActualizarPerfil);
 aplicacion.get("Comentarios", pantallaComentarios);
 // JEFE DE DIVISIÓN DE ESTUDIOS PROFESIONALES
-aplicacion.get("Jefe/Estadtisticas", pantallaEstadtisticas);
+aplicacion.get("Jefe/Estadisticas", pantallaEstadtisticas);
 // ACADEMIA
 aplicacion.get("Academia/Bandeja-de-entrada", pantallaBandejaDeEntradaAcademia);
 aplicacion.get("Academia/Enviar-analisis", pantallaEnviarAnalisis);
