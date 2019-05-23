@@ -6,24 +6,24 @@ aplicacion.listen(8989); // puerto en que el servidor jalará. Normalmente es el
 aplicacion.get("/", pantallaInicio);
 aplicacion.get("/Login", pantallaLogin);
 aplicacion.get("/Registrarse", pantallaRegistrarse);
-aplicacion.get("/Recuperar-contra", pantallaRecuperarContra);
+aplicacion.get("/Recuperar_contra", pantallaRecuperarContra);
 // ALUMNO
-aplicacion.get("Usuario/Tablero", pantallaTableroAlumno);
-aplicacion.get("Usuario/Solicitar-de-convalidación", pantallaSolicitudConvalidacion);
+aplicacion.get("Usuario-Tablero", pantallaTableroAlumno);
+aplicacion.get("Usuario-Solicitar_de_convalidación", pantallaSolicitudConvalidacion);
 // COORDINADOR
-aplicacion.get("Usuario/Bandeja-de-entrada", pantallaBandejaDeEntradaCoordinador);
-aplicacion.get("Usuario/Enviar-dictamen", pantallaEnviarDictamen);
-aplicacion.get("Usuario/Solicitar-analisis", pantallaSolicitarAnalisis);
+aplicacion.get("Usuario-Bandeja_de_entrada", pantallaBandejaDeEntradaCoordinador);
+aplicacion.get("Usuario-Enviar_dictamen", pantallaEnviarDictamen);
+aplicacion.get("Usuario-Solicitar_analisis", pantallaSolicitarAnalisis);
 // ALUMNO-COORDINADOR
-aplicacion.get("Usuario/Actualizar-perfil", pantallaActualizarPerfil);
+aplicacion.get("Usuario-Actualizar_perfil", pantallaActualizarPerfil);
 aplicacion.get("Comentarios", pantallaComentarios);
 // JEFE DE DIVISIÓN DE ESTUDIOS PROFESIONALES
-aplicacion.get("Jefe/Estadisticas", pantallaEstadtisticas);
+aplicacion.get("Jefe-Estadisticas", pantallaEstadtisticas);
 // ACADEMIA
-aplicacion.get("Academia/Bandeja-de-entrada", pantallaBandejaDeEntradaAcademia);
-aplicacion.get("Academia/Enviar-analisis", pantallaEnviarAnalisis);
+aplicacion.get("Academia-Bandeja_de_entrada", pantallaBandejaDeEntradaAcademia);
+aplicacion.get("Academia-Enviar_analisis", pantallaEnviarAnalisis);
 // DEPARTAMENTO DE SERVICIOS ESCOLARES
-aplicacion.get("Servicios-Escolares/Bandeja-de-entrada", pantallaBandejaDeEntradaServiciosEscolares);
+aplicacion.get("Servicios_Escolares-Bandeja_de_entrada", pantallaBandejaDeEntradaServiciosEscolares);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
