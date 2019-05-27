@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MarmotaCosmica/LAARRI/issues"
   },
-  "homepage": "https://github.com/MarmotaCosmica/LAARRI#readme"
+  "homepage": "https://github.com/MarmotaCosmica/LAARRI#readme",
+  "dependencies": {
+    "express": "^4.17.0"
+  }
 }
