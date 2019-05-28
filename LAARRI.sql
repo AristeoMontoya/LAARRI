@@ -1,14 +1,15 @@
- drop database LAARRI;
+drop database LAARRI;
 create database LAARRI;
 use LAARRI;
 
 -- //////////// alumno y coordinador
 create table Carrera(
-	CarreraID varchar(10) PRIMARY KEY,
-    Nombre varchar(30) NOT NULL
+	CarreraID varchar(10),
+    Nombre varchar(30) NOT NULL,
+    PRIMARY KEY(UsuarioID)
 );
 create table Usuario(
-	UsuarioID varchar(12) PRIMARY KEY,
+	UsuarioID varchar(12),
 	Contraseña varchar(30) NOT NULL,
     ApellidoPaterno varchar(20) NOT NULL,
 	ApellidoMaterno varchar(20),
@@ -17,20 +18,21 @@ create table Usuario(
     FotoDePerfil varchar(100),
     EsCoordinador boolean NOT NULL, -- true para coordinadores, false para alumnos
     NuevaCarrera varchar(30), -- Esto siempre es nulo si se trata de el coordinador
-    FOREIGN KEY(NuevaCarrera) REFERENCES Carrera(CarreraID)
+    CONSTRAINT fk_1 FOREIGN KEY(NuevaCarrera) REFERENCES Carrera(CarreraID),
+    PRIMARY KEY(UsuarioID)
 );
 create table UsuarioCarrera(
 	UsuarioID varchar(12),
 	CarreraID varchar(10),
-    FOREIGN KEY(CarreraID) REFERENCES Carrera(CarreraID),
-    FOREIGN KEY(UsuarioID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_1 FOREIGN KEY(CarreraID) REFERENCES Carrera(CarreraID),
+    CONSTRAINT fk_2 FOREIGN KEY(UsuarioID) REFERENCES Usuario(UsuarioID),
     PRIMARY KEY(UsuarioID, CarreraID)
 );
 create table PantallaConfigurarPerfil(
 	UsuarioID varchar(12),
     NuevaFotoDePerfil varchar(100),
     NuevoCorreo varchar(50),
-    FOREIGN KEY(UsuarioID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_1 FOREIGN KEY(UsuarioID) REFERENCES Usuario(UsuarioID),
 	PRIMARY KEY(UsuarioID)
 );
 
@@ -38,7 +40,7 @@ create table PantallaConfigurarPerfil(
 create table PantallaSolicitarConvalidacion( -- tabla de recuperación de datos de la pantalla de la solicitud de abajo
 	AlumnoID varchar(12), -- esto se llena automáticamente cuando un usuario se crea
     NuevaCarrera varchar(30),
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
     PRIMARY KEY(AlumnoID)
 );
 create table MensajeSolicitudDeConvalidacion( -- mensaje que el alumno envía al coordinador para realizar la solicitud de convalidación de estudios
@@ -46,9 +48,9 @@ create table MensajeSolicitudDeConvalidacion( -- mensaje que el alumno envía al
     CarreraDeOrigen varchar(30) NOT NULL,
     CarreraSolicitada varchar(30) NOT NULL,
     FechaDeRealizacion datetime NOT NULL,
-	FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-	FOREIGN KEY(CarreraDeOrigen) REFERENCES Carrera(CarreraID),
-	FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
+	CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+	CONSTRAINT fk_2 FOREIGN KEY(CarreraDeOrigen) REFERENCES Carrera(CarreraID),
+	CONSTRAINT fk_3 FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
     PRIMARY KEY(AlumnoID, CarreraSolicitada) -- Si se rechaza la solicitud en una carrera el alumno siempre puede realizar una para otra carrera, pero no para la que se le rechazo
 );
 create table Movimientos(
@@ -59,16 +61,16 @@ create table Movimientos(
     FechaDeFinalizacion datetime,
     EnProceso boolean NOT NULL, -- en caso de ser true se muestra "en proceso" la wea; de ser falso pues ya se acabó o al coordinador/academia le vale y no ha ni habierto tu solicitud
     Aceptado boolean, -- si es null es porque aún no se acabó la wea
-	FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-	FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
+	CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+	CONSTRAINT fk_2 FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
     PRIMARY KEY(AlumnoID, CarreraSolicitada, Estado) -- Si se rechaza la solicitud en una carrera el alumno siempre puede realizar una para otra carrera, pero no para la que se le rechazo
 );
 create table Estado(
 	AlumnoID varchar(12),
     CarreraSolicitada varchar(30) NOT NULL,
     Estado varchar(20),
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-	FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+	CONSTRAINT fk_2 FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
     PRIMARY KEY(AlumnoID, CarreraSolicitada) -- Si se rechaza la solicitud en una carrera el alumno siempre puede realizar una para otra carrera, pero no para la que se le rechazo
 );
 
@@ -79,8 +81,8 @@ create table PantallaEnviarDictamen(
     AlumnoID varchar(12),
     Comentario varchar(500),
     Documento varchar(100),
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-    FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_2 FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
     PRIMARY KEY(ClaveDeTrabajador)
 );
 create table MensajeConDictamen(
@@ -89,8 +91,8 @@ create table MensajeConDictamen(
     Documento varchar(100) NOT NULL,
     Comentario varchar(500),
     FechaDeEmision datetime NOT NULL,
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-    FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_2 FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
     PRIMARY KEY(ClaveDeTrabajador, AlumnoID)
 );
 create table PantallaSolicitarAnalisisAcademico(
@@ -98,8 +100,8 @@ create table PantallaSolicitarAnalisisAcademico(
     AlumnoID varchar(12),
     Comentario varchar(500),
     Documento varchar(100),
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-    FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_2 FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
     PRIMARY KEY(ClaveDeTrabajador)
 );
 
@@ -109,19 +111,21 @@ create table MensajeSolicitudDeAnalisisAcademico(
     Comentario varchar(500),
     Documento varchar(100),
     Fecha datetime NOT NULL,
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-    FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_2 FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
     PRIMARY KEY(ClaveDeTrabajador, AlumnoID)
 );
 
 
 create table DepartamentoDeServiciosEscolares(
-	ClaveDeAcceso varchar(12) PRIMARY KEY,
-    Contraseña varchar(30) NOT NULL
+	ClaveDeAcceso varchar(12),
+    Contraseña varchar(30) NOT NULL,
+    PRIMARY KEY(ClaveDeAcceso)
 );
 create table Academia(
-	ClaveDeAcceso varchar(12) PRIMARY KEY,
-    Contraseña varchar(30) NOT NULL
+	ClaveDeAcceso varchar(12),
+    Contraseña varchar(30) NOT NULL,
+    PRIMARY KEY(ClaveDeAcceso)
 );
 create table PantallaEnviarAnalisisAcademico(
 	ClaveDeAcceso varchar(12),
@@ -130,8 +134,8 @@ create table PantallaEnviarAnalisisAcademico(
     Estado varchar(10),
     NombreDeQuienLoElabora varchar(50),
     Comentario varchar(500),
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-    FOREIGN KEY(ClaveDeAcceso) REFERENCES Academia(ClaveDeAcceso),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_2 FOREIGN KEY(ClaveDeAcceso) REFERENCES Academia(ClaveDeAcceso),
     PRIMARY KEY(ClaveDeAcceso)
 );
 create table MensajeAnalisisAcademico(
@@ -156,9 +160,9 @@ create table SolicitudDeConvalidacion(
     Estado varchar(20),
     FechaDeInicio datetime NOT NULL,
     FechaDeFinalizacion datetime,
-    FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-	FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
-    FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
+    CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+	CONSTRAINT fk_2 FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+    CONSTRAINT fk_3 FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
     PRIMARY KEY(NumeroDeSolicitud)
 );
 
