@@ -4,6 +4,6 @@ module.exports = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'database_links' // esto debe ser laarri, no database_links
+    database: 'LAARRI' // esto debe ser laarri, no database_links
   }
 };
