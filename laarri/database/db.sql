@@ -7,7 +7,7 @@ create table Carrera(
   PRIMARY KEY(CarreraID)
 );
 create table Usuario(
-	UsuarioID varchar(12),
+	id varchar(12),
 	password varchar(30) NOT NULL,
   ApellidoPaterno varchar(20),
 	ApellidoMaterno varchar(20),
@@ -19,13 +19,13 @@ create table Usuario(
   NuevaCarrera varchar(15),
 	TieneAdeudo Boolean NOT NULL,
   FOREIGN KEY(NuevaCarrera) REFERENCES Carrera(CarreraID),
-  PRIMARY KEY(UsuarioID)
+  PRIMARY KEY(id)
 );
 create table UsuarioCarrera(
 	UsuarioID varchar(12),
 	CarreraID varchar(15),
   FOREIGN KEY(CarreraID) REFERENCES Carrera(CarreraID),
-  FOREIGN KEY(UsuarioID) REFERENCES Usuario(UsuarioID),
+  FOREIGN KEY(UsuarioID) REFERENCES Usuario(id),
   PRIMARY KEY(UsuarioID, CarreraID)
 );
 create table PantallaConfigurarPerfil(
@@ -39,7 +39,7 @@ create table PantallaConfigurarPerfil(
 create table PantallaSolicitarConvalidacion(
 	AlumnoID varchar(12),
   NuevaCarrera varchar(30),
-  CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+  CONSTRAINT fk_1 FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
   PRIMARY KEY(AlumnoID)
 );
 create table MensajeSolicitudDeConvalidacion(
@@ -47,7 +47,7 @@ create table MensajeSolicitudDeConvalidacion(
   CarreraDeOrigen varchar(15) NOT NULL,
   CarreraSolicitada varchar(15) NOT NULL,
   FechaDeRealizacion datetime NOT NULL,
-	FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+	FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
 	FOREIGN KEY(CarreraDeOrigen) REFERENCES Carrera(CarreraID),
 	FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
   PRIMARY KEY(AlumnoID, CarreraSolicitada)
@@ -60,7 +60,7 @@ create table Movimientos(
   FechaDeFinalizacion datetime,
   EnProceso boolean NOT NULL,
   Aceptado boolean,
-	FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+	FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
 	FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
   PRIMARY KEY(AlumnoID, CarreraSolicitada, Estado)
 );
@@ -68,7 +68,7 @@ create table Estado(
 	AlumnoID varchar(12),
   CarreraSolicitada varchar(15) NOT NULL,
   Estado varchar(20),
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
 	FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
   PRIMARY KEY(AlumnoID, CarreraSolicitada)
 );
@@ -79,8 +79,8 @@ create table PantallaEnviarDictamen(
   AlumnoID varchar(12),
   Comentario varchar(500),
   Documento varchar(100),
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
+  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(id),
   PRIMARY KEY(ClaveDeTrabajador)
 );
 create table MensajeConDictamen(
@@ -89,8 +89,8 @@ create table MensajeConDictamen(
   Documento varchar(100) NOT NULL,
   Comentario varchar(500),
   FechaDeEmision datetime NOT NULL,
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
+  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(id),
   PRIMARY KEY(ClaveDeTrabajador, AlumnoID)
 );
 create table PantallaSolicitarAnalisisAcademico(
@@ -98,8 +98,8 @@ create table PantallaSolicitarAnalisisAcademico(
   AlumnoID varchar(12),
   Comentario varchar(500),
   Documento varchar(100),
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
+  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(id),
   PRIMARY KEY(ClaveDeTrabajador)
 );
 
@@ -109,23 +109,23 @@ create table MensajeSolicitudDeAnalisisAcademico(
   Comentario varchar(500),
   Documento varchar(100),
   Fecha datetime NOT NULL,
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
+  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(id),
   PRIMARY KEY(ClaveDeTrabajador, AlumnoID)
 );
 
 
 create table DepartamentoDeServiciosEscolares(
-	ClaveDeAcceso varchar(12),
+	id varchar(12),
   password varchar(30) NOT NULL,
-  PRIMARY KEY(ClaveDeAcceso)
+  PRIMARY KEY(id)
 );
 create table Academia(
-	ClaveDeAcceso varchar(12),
+	id varchar(12),
   password varchar(30) NOT NULL,
   Carrera varchar(15) NOT NULL,
   FOREIGN KEY(Carrera) REFERENCES Carrera(CarreraID),
-  PRIMARY KEY(ClaveDeAcceso)
+  PRIMARY KEY(id)
 );
 create table PantallaEnviarAnalisisAcademico(
 	ClaveDeAcceso varchar(12),
@@ -133,8 +133,8 @@ create table PantallaEnviarAnalisisAcademico(
   Estado varchar(10),
   NombreDeQuienLoElabora varchar(50),
   Comentario varchar(500),
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-  FOREIGN KEY(ClaveDeAcceso) REFERENCES Academia(ClaveDeAcceso),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
+  FOREIGN KEY(ClaveDeAcceso) REFERENCES Academia(id),
   PRIMARY KEY(ClaveDeAcceso)
 );
 create table MensajeAnalisisAcademico(
@@ -144,8 +144,8 @@ create table MensajeAnalisisAcademico(
   NombreDeQuienLoElabora varchar(50) NOT NULL,
   Comentario varchar(500),
   FechaDeEmision datetime NOT NULL,
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-  FOREIGN KEY(ClaveDeAcceso) REFERENCES Academia(ClaveDeAcceso),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
+  FOREIGN KEY(ClaveDeAcceso) REFERENCES Academia(id),
   PRIMARY KEY(ClaveDeAcceso)
 );
 
@@ -158,15 +158,15 @@ create table SolicitudDeConvalidacion(
   Estado varchar(20),
   FechaDeInicio datetime NOT NULL,
   FechaDeFinalizacion datetime,
-  FOREIGN KEY(AlumnoID) REFERENCES Usuario(UsuarioID),
-  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
+  FOREIGN KEY(AlumnoID) REFERENCES Usuario(id),
+  FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(id),
   FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
   PRIMARY KEY(NumeroDeSolicitud)
 );
 
 create table jefe(
-	clavedeacceso varchar(12),
+	id varchar(12),
 	password varchar(30) NOT NULL,
 	nombre varchar(50) NOT NULL,
-	PRIMARY KEY(clave)
+	PRIMARY KEY(id)
 );
