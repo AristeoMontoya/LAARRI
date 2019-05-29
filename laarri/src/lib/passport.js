@@ -12,6 +12,7 @@ passport.use('local.login.academia', new LocalStrategy({
   if(rows.length > 0) {
     const academia = rows[0];
     if(password === academia.password) {
+      req.user = academia;
       return done(null, academia, req.flash('success', 'Acceso correcto'));
     }
     else {
@@ -32,6 +33,7 @@ passport.use('local.login.serviciosEscolares', new LocalStrategy({
   if(rows.length > 0) {
     const user = rows[0];
     if(password === user.password) {
+      req.user = user;
       return done(null, user, req.flash('success', 'Acceso correcto'));
     }
     else {
@@ -52,6 +54,7 @@ passport.use('local.login.jefe', new LocalStrategy({
   if(rows.length > 0) {
     const jefe = rows[0];
     if(password === jefe.password) {
+      req.user = jefe;
       return done(null, jefe, req.flash('success', 'Acceso correcto, jefazo'));
     }
     else {
@@ -72,6 +75,7 @@ passport.use('local.login.usuario', new LocalStrategy({
   if(rows.length > 0) {
     const user = rows[0];
     if(password === user.password) {
+      req.user = user;
       return done(null, user, req.flash('success', 'Bienvenido, ' + user.NombreDeUsuario));
     }
     else {
@@ -106,6 +110,7 @@ passport.use('local.signup.alumno', new LocalStrategy({
   // guardando en la base de datos
   const result = await pool.query('INSERT INTO usuario SET ?', newUser);
   newUser.id = result.insertId;
+  req.user = newUser;
   return done(null, newUser);
 }));
 
@@ -123,6 +128,7 @@ passport.use('local.signup.coordinador', new LocalStrategy({
   // guardando en la base de datos
   const result = await pool.query('INSERT INTO usuario SET ?', newUser);
   newUser.id = result.insertId;
+  req.user = newUser;
   return done(null, newUser);
 }));
 

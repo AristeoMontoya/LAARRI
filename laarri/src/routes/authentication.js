@@ -81,7 +81,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       else {
         if(req.body.clave.length == 8) { // alumno
           passport.authenticate('local.login.usuario', {
-            successRedirect: '/profile',
+            successRedirect: '/perfil',
             failureRedirect: '/login',
             failureFlash: true
           })(req, res, next);
@@ -98,8 +98,8 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
   }
 });
 
-router.get('/profile', isLoggedIn, (req, res) => {
-  res.render('screens/profile');
+router.get('/perfil', isLoggedIn, (req, res) => {
+  res.render('perfil');
 });
 
 router.get('/logout', isLoggedIn, (req, res) => {
