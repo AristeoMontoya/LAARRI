@@ -30,6 +30,10 @@ body {
   background-repeat: no-repeat;
 }
 
+.caja-error {
+  color: red;
+}
+
 .rect-chido { /* Pa' el botón */
   width: 300px;
   height: 45px;

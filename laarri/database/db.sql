@@ -8,14 +8,16 @@ create table Carrera(
 );
 create table Usuario(
 	UsuarioID varchar(12),
-	Contraseña varchar(30) NOT NULL,
-  ApellidoPaterno varchar(20) NOT NULL,
+	password varchar(30) NOT NULL,
+  ApellidoPaterno varchar(20),
 	ApellidoMaterno varchar(20),
-  Nombre varchar(50) NOT NULL,
+  Nombre varchar(50),
+	NombreDeUsuario varchar(50) NOT NULL,
 	Correo varchar(50) NOT NULL,
   FotoDePerfil varchar(100),
   EsCoordinador boolean NOT NULL,
   NuevaCarrera varchar(15),
+	TieneAdeudo Boolean NOT NULL,
   FOREIGN KEY(NuevaCarrera) REFERENCES Carrera(CarreraID),
   PRIMARY KEY(UsuarioID)
 );
@@ -115,12 +117,12 @@ create table MensajeSolicitudDeAnalisisAcademico(
 
 create table DepartamentoDeServiciosEscolares(
 	ClaveDeAcceso varchar(12),
-  Contraseña varchar(30) NOT NULL,
+  password varchar(30) NOT NULL,
   PRIMARY KEY(ClaveDeAcceso)
 );
 create table Academia(
 	ClaveDeAcceso varchar(12),
-  Contraseña varchar(30) NOT NULL,
+  password varchar(30) NOT NULL,
   Carrera varchar(15) NOT NULL,
   FOREIGN KEY(Carrera) REFERENCES Carrera(CarreraID),
   PRIMARY KEY(ClaveDeAcceso)
@@ -160,4 +162,11 @@ create table SolicitudDeConvalidacion(
   FOREIGN KEY(ClaveDeTrabajador) REFERENCES Usuario(UsuarioID),
   FOREIGN KEY(CarreraSolicitada) REFERENCES Carrera(CarreraID),
   PRIMARY KEY(NumeroDeSolicitud)
+);
+
+create table jefe(
+	clavedeacceso varchar(12),
+	password varchar(30) NOT NULL,
+	nombre varchar(50) NOT NULL,
+	PRIMARY KEY(clave)
 );

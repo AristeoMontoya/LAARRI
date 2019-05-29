@@ -22,5 +22,10 @@ insert into academia values
   ("acatics", "tic", "tics"),
   ("acaindustrial", "ind", "industrial");
 
-insert into DepartamentoDeServiciosEscolares values (
-  "serviciosesc", "ser");
+insert into DepartamentoDeServiciosEscolares values
+  ("serviciosesc", "ser");
+
+insert into jefe values
+  ("jefedejefes", "jefe", "El jefe de jefes");
+
+-- los usuarios de awewi se tienen que registrar porque su clave es cifrada, estos menes de arriba no la tienen cifrada

@@ -4,6 +4,7 @@ module.exports = {
     if(req.isAuthenticated()) {
       return next();
     }
+    req.flash("message", "Necesitas iniciar sesión para entrar en esa zona de la página.");
     return res.redirect('/login');
   },
 
