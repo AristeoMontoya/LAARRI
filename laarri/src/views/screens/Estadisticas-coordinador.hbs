@@ -1,59 +1,64 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Panel de estadísticas</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    </head>
-  <body>
-    <button class="Boton_ordenar">Ordenar por</button>
-    <div class="contenedor">
-      <canvas id="grafica"></canvas>
-    </div>
+<main class="estira-el-fondo">
+  <html lang="en" dir="ltr">
+    <head>
+      <meta charset="utf-8">
+      <title>Panel de estadísticas</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+      </head>
+    <body class="estadistica">
+      <button class="Boton_ordenar">Ordenar por</button>
+      <div class="contenedor">
+        <canvas id="grafica" class="contenedor-grafica"></canvas>
+      </div>
 
-    <script>
-    //Sé que esto es un cochinero pero apenas así jala
-      let grafica = document.getElementById('grafica').getContext('2d');
+      <script>
+      //Sé que esto es un cochinero pero apenas así jala
+        let grafica = document.getElementById('grafica').getContext('2d');
 
-      let grafica_barras = new Chart(grafica, {
-        type:'line',
-        data:
-        {
-          labels:["Uno", "Dos", "Tres"],
-          datasets:
-          [
-            {
-                label:'Solicitudes procesadas',
-                data:[15, 20, 17, 0, 50],
-                backgroundColor:'#67DAFF',
-                borderWidth:1,
-                borderColor:'#03A9F4',
-                pointBackgroundColor:'#007AC1',
-                lineTensions:0
-            }
-          ]
-        },
-        options:
-        {
-          title:
+        let grafica_barras = new Chart(grafica, {
+          type:'line',
+          data:
           {
-            display:true,
-            text:"Procesos realizados",
-            fontSize:18
+            labels:["Uno", "Dos", "Tres"],
+            datasets:
+            [
+              {
+                  label:'Solicitudes procesadas',
+                  data:[15, 20, 17, 0, 50],
+                  backgroundColor:'#67DAFF',
+                  borderWidth:1,
+                  borderColor:'#03A9F4',
+                  pointBackgroundColor:'#007AC1',
+                  lineTensions:0
+              }
+            ]
           },
-          legend:
+          options:
           {
-            display:false
+            title:
+            {
+              display:true,
+              text:"Procesos realizados",
+              fontSize:18
+            },
+            legend:
+            {
+              display:false,
+              labels:
+              {
+                fontColor:"#FFFFFF"
+              }
+            }
           }
-        }
-      });
-    </script>
+        });
+      </script>
 
-    <script id="tarjetas" type="text/x-handlebars-template">
-      {{#each Solicitud}}
-        <h2>{{name}}</h2>
-      {{/each}}
-    </script>
+      <script id="tarjetas" type="text/x-handlebars-template">
+        {{#each Solicitud}}
+          <h2>{{name}}</h2>
+        {{/each}}
+      </script>
 
-  </body>
-</html>
+    </body>
+  </html>
+</main>

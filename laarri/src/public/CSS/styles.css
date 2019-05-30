@@ -3,6 +3,19 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
+.estadistica
+{
+  background: #546E7A;
+}
+
+.contenedor-grafica
+{
+  padding: 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+}
+
 .estira-el-fondo { /* estira a toda la pantalla */
   width: 100vw;
   height: 100vh;
