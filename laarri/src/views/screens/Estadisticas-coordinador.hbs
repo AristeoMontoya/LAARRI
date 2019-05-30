@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Panel de estadísticas</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-  </head>
+    </head>
   <body>
     <button class="Boton_ordenar">Ordenar por</button>
     <div class="contenedor">
@@ -23,7 +23,7 @@
           datasets:
           [
             {
-                label:'Algo',
+                label:'Solicitudes procesadas',
                 data:[15, 20, 17, 0, 50],
                 backgroundColor:'#67DAFF',
                 borderWidth:1,
@@ -40,19 +40,19 @@
             display:true,
             text:"Procesos realizados",
             fontSize:18
+          },
+          legend:
+          {
+            display:false
           }
         }
       });
     </script>
 
-    <div class="contenedor-coordinador">
-
-    </div>
-
-    <script>
-      with open('informacion.json') as f:
-      d = json.load(f);
-      console.log(d);
+    <script id="tarjetas" type="text/x-handlebars-template">
+      {{#each Solicitud}}
+        <h2>{{name}}</h2>
+      {{/each}}
     </script>
 
   </body>
