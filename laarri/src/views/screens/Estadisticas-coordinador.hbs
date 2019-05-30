@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Panel de estadísticas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+  </head>
+  <body>
+    <button class="Boton_ordenar">Ordenar por</button>
+    <div class="contenedor">
+      <canvas id="grafica"></canvas>
+    </div>
+
+    <script>
+    //Sé que esto es un cochinero pero apenas así jala
+      let grafica = document.getElementById('grafica').getContext('2d');
+
+      let grafica_barras = new Chart(grafica, {
+        type:'line',
+        data:
+        {
+          labels:["Uno", "Dos", "Tres"],
+          datasets:
+          [
+            {
+                label:'Algo',
+                data:[15, 20, 17, 0, 50],
+                backgroundColor:'#67DAFF',
+                borderWidth:1,
+                borderColor:'#03A9F4',
+                pointBackgroundColor:'#007AC1',
+                lineTensions:0
+            }
+          ]
+        },
+        options:
+        {
+          title:
+          {
+            display:true,
+            text:"Procesos realizados",
+            fontSize:18
+          }
+        }
+      });
+    </script>
+
+    <div class="contenedor-coordinador">
+
+    </div>
+
+    <script>
+      with open('informacion.json') as f:
+      d = json.load(f);
+      console.log(d);
+    </script>
+
+  </body>
+</html>

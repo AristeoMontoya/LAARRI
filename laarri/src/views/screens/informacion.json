@@ -1,0 +1,38 @@
+{
+  "informacion":[
+    {
+      "nombre-coordinador": "Melvin",
+      "Numero-empleado": 12345678,
+      "Carrera": "Sistemas",
+      "Solicitudes recibidas": 18,
+      "Proceso": "Espera de convalidación"
+    },
+    {
+      "nombre-coordinador": "Cecilia",
+      "Numero-empleado": 87654321,
+      "Carrera": "Industrial",
+      "Solicitudes recibidas": 48,
+      "Proceso": "Analizando solicitud"
+    },
+    {
+      "nombre-coordinador": "Wenceslao",
+      "Numero-empleado": 11223344,
+      "Carrera": "Mecatrónica",
+      "Solicitudes recibidas": 5,
+      "Proceso": "Examen voacional"
+    },
+    {
+      "nombre-coordinador": "Rodogonio",
+      "Numero-empleado": 33334444,
+      "Carrera": "Electrónica",
+      "Solicitudes recibidas": 35,
+      "Proceso": "Solicitud rechazada"
+    }
+  ]
+}
+/* Nombre de coordinador
+Número de empleado
+Carrera
+Solicitudes recibidad
+Proceso
+Detalles */

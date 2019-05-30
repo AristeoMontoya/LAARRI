@@ -7,6 +7,7 @@ const session = require('express-session');
 const mysqlStore = require('express-mysql-session');
 const passport = require('passport');
 const validator = require('express-validator');
+// var Chart = require('chart.js');
 const bodyParser = require('body-parser'); // no se para que es esto
 
 const { database } = require('./keys');

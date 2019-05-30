@@ -11,6 +11,10 @@ router.get('/', isNotLoggedIn, (res, req) => {
   req.render('index');
 });
 
+router.get('/listado_estadisticas', (res, req) => {
+  req.render('screens/Estadisticas-coordinador');
+});
+
 router.get('/comentarios', (res, req) => {
   req.render('screens/comentarios');
 });
