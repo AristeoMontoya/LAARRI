@@ -1,7 +1,6 @@
 body {
   background: #039be5;
   font-family: 'Ubuntu', sans-serif;
-  overflow: hidden; /* es por esta cosa que no tenemos barras para bajar en la página */
 }
 
 .estira-el-fondo { /* estira a toda la pantalla */

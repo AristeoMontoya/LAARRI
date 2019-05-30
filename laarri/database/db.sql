@@ -170,3 +170,5 @@ create table jefe(
 	nombre varchar(50) NOT NULL,
 	PRIMARY KEY(id)
 );
+
+-- jaja yes
